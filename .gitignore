@@ -1,3 +1,10 @@
+*.lock
+
+# nix
+result
+result-*
+
+# haskell
 dist
 dist-*
 cabal-dev
