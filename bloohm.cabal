@@ -16,6 +16,9 @@ library
   exposed-modules:     Bloohm
   ghc-options:         -Wall -fno-warn-name-shadowing
   build-depends:       base >= 4.11 && < 5
+                     , cryptonite
+                     , bytestring
+                     , memory
 
 executable bloohm
   main-is:            Main.hs
