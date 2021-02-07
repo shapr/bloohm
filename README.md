@@ -21,7 +21,7 @@ In the image below you can see that one command has finished, and another comman
 # How to make it go?
 1. Install bloohm, then add the snippet below to your `~/.zshrc` (no idea if this works in bash).
    You may need to change `/dev/ttyACM0` to a different value, `dmesg` will probably show you the right name.
-2. Load the `code.py` from thibs repository onto your NeoTrellis M4.
+2. Load the `code.py` from this repository onto your NeoTrellis M4.
 3. run "try ls", and your status LEDs should briefly turn yellow until the command is done, when they turn green.
 
 # The shell snippet
