@@ -27,6 +27,9 @@ executable bloohm
   ghc-options:        -threaded -O2
   build-depends:      base
                     , bloohm
+                    , serialport
+                    , bytestring
+                    , ReadArgs
 
 test-suite bloohm-tests
   type:             exitcode-stdio-1.0

@@ -26,6 +26,7 @@ let
       pkgs.haskellPackages.ghcid
       pkgs.haskellPackages.ormolu
       pkgs.haskellPackages.hlint
+      pkgs.haskellPackages.hasktags
       pkgs.niv
       pkgs.nixpkgs-fmt
     ];
