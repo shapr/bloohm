@@ -7,7 +7,14 @@ Until now, I could only turn the whole board colors, yellow for "process running
 
 I want the LEDs for output only, I don't want to do any logic on the neotrellis board.
 
-So, I took an idea from [bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) and hash the command line to figure out which LEDs to update with process status colors.
+So, I took an idea from [bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) and run the current directory and command line through three different hashes.
+I use the results modulus 32 to figure out which LEDs to update with process status colors.
+
+# What does it look like?
+
+In the image below you can see that one command has finished, and another command is in progress.
+
+![bloohm](bloohm.jpg)
 
 # How to make it go?
 1. Install bloohm, then add the snippet below to your `~/.zshrc` (no idea if this works in bash).
