@@ -1,0 +1,2 @@
+status = [ "testing/bloohm" ]
+timeout_sec = 600
