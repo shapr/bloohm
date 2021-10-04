@@ -19,7 +19,6 @@ main = do
       combined = (c <>) <$> (show <$> indices) -- 1,13 -> r1,r13
       total = intercalate "," combined
   h <- hOpenSerial serialPort $ defaultSerialSettings {commSpeed = CS115200}
-  -- print $ "sending " <> total <> " to " <> serialPort
   hPutStr h (total <> "\r") -- circuit python wants
   hClose h
 
