@@ -3,15 +3,12 @@ module Bloohm where
 import Crypto.Hash (hashWith)
 import Crypto.Hash.Algorithms
 import Data.Bits
-import qualified Data.ByteArray.Encoding as B (Base (..), convertToBase)
 import Data.ByteString (ByteString)
-import qualified Data.ByteString as BS
-import qualified Data.ByteString.Char8 as BS8
 import Data.List (foldl', sort)
 import Data.Word (Word8)
-
-doBloohm :: String
-doBloohm = "Bloohm"
+import qualified Data.ByteArray.Encoding as B (Base(..), convertToBase)
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Char8 as BS8
 
 findPos :: String -> [Integer]
 findPos s = findBits $ BS8.pack s

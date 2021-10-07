@@ -2,9 +2,9 @@
 
 module Main where
 
+import Bloohm
 import Hedgehog
 import Hedgehog.Main
-import Bloohm
 
 prop_test :: Property
 prop_test = property $ do

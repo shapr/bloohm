@@ -5,12 +5,12 @@
 module Main where
 
 import Bloohm (findPos)
-import qualified Data.ByteString.Char8 as B
 import Data.List
 import ReadArgs (readArgs)
 import System.Environment (getArgs)
 import System.Hardware.Serialport
 import System.IO
+import qualified Data.ByteString.Char8 as B
 
 main = do
   (serialPort, color :: Color, dir, cmdline) <- readArgs
@@ -19,7 +19,6 @@ main = do
       combined = (c <>) <$> (show <$> indices) -- 1,13 -> r1,r13
       total = intercalate "," combined
   h <- hOpenSerial serialPort $ defaultSerialSettings {commSpeed = CS115200}
-  -- print $ "sending " <> total <> " to " <> serialPort
   hPutStr h (total <> "\r") -- circuit python wants
   hClose h
 
