@@ -19,9 +19,10 @@ In the image below you can see that one command has finished, and another comman
 ![bloohm](bloohm.jpg)
 
 # How to make it go?
+0. Your NeoTrellis M4 must be running circuit python 8.x or later to be able to turn on the secondary serial port via boot.py !
 1. Install bloohm, then add the snippet below to your `~/.zshrc` (no idea if this works in bash).
-   You may need to change `/dev/ttyACM0` to a different value, `dmesg` will probably show you the right name.
-2. Load the `code.py` from this repository onto your NeoTrellis M4.
+   You may need to change `/dev/ttyACM1` to a different value, `dmesg` will probably show you the right name.
+2. Load the `code.py` from this repository onto your NeoTrellis M4, and additionally copy the boot.py onto your NeoTrellis M4.
 3. run "try ls", and your status LEDs should briefly turn yellow until the command is done, when they turn green.
 
 # The shell snippet
@@ -30,7 +31,7 @@ In the image below you can see that one command has finished, and another comman
 # for long running commands
 function try () {
 	export thecmd="$*"
-	bloohm "/dev/ttyACM0" Yellow $PWD:A $thecmd
+	bloohm "/dev/ttyACM1" Yellow $PWD:A $thecmd
 	time $* && fin || die; # cargo install tally, replacement for time
 }
 
@@ -39,12 +40,12 @@ function play_sound () {
 }
 
 function fin () {
-	bloohm "/dev/ttyACM0" Green $PWD:A $thecmd
+	bloohm "/dev/ttyACM1" Green $PWD:A $thecmd
 	play_sound monkey # monkey.wav from XEmacs https://bitbucket.org/xemacs/sounds-wav/src
 }
 
 function die() {
-	bloohm "/dev/ttyACM0" Red $PWD:A $thecmd
+	bloohm "/dev/ttyACM1" Red $PWD:A $thecmd
 	play_sound yeep # yeep.wav from XEmacs https://bitbucket.org/xemacs/sounds-wav/src
 	play_sound yeep
 }

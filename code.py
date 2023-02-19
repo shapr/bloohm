@@ -4,11 +4,16 @@ import busio
 import adafruit_trellism4
 import adafruit_adxl34x
 import supervisor
+import usb_cdc
 
 # Set up Trellis and accelerometer
 trellis = adafruit_trellism4.TrellisM4Express(rotation=0)
 i2c = busio.I2C(board.ACCELEROMETER_SCL, board.ACCELEROMETER_SDA)
 sensor = adafruit_adxl34x.ADXL345(i2c)
+data_port = usb_cdc.data
+
+# set data_port timeout, is this a good value to set?
+data_port.timeout = 0
 
 #define colors
 black = (0,0,0)
@@ -36,6 +41,7 @@ def linear_to_pair(n):
     return (x,y)
 
 def countup(color,delay=0.01):
+    #[setloc(x,y,color) for x in range(trellis.pixels.width) for y in range(trellis.pixels.height)]
     [setloc(xy[0],xy[1],color,delay) for xy in pixlsh]
     [setloc(xy[0],xy[1],color,delay) for xy in pixlsw]
 
@@ -46,9 +52,11 @@ def setloc(x,y,color,delay):
 def color(c):
     trellis.pixels.fill(c)
 
-def color_from_input():
-    data = input().strip()
+def color_from_input(color_command):
+    text_data = color_command.decode("utf-8")
+    data = text_data.strip()
     color = off
+    # print(data)
     for l in data.split(","):
         if l[0] == "r":
             color = red
@@ -66,8 +74,11 @@ while True:
         trellis.pixels.brightness = brightness
         print("set trellis brightness to",brightness)
         time.sleep(0.1)
-    if supervisor.runtime.serial_bytes_available:
-        color_from_input()
+    if data_port.in_waiting:
+        # color_command = data_port.readline()
+        # color_from_input(color_command)
+        # combining the two lines above fixed the timing issue where some pixels were yellow and some were green!
+        color_from_input(data_port.readline())
     # check tap, no colors when detected
     if sensor.events['tap']:
         countup((16,16,64))
