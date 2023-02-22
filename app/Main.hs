@@ -6,11 +6,15 @@ module Main where
 
 import Bloohm (findPos)
 import qualified Data.ByteString.Char8 as B
-import Data.List
+import Data.List ( intercalate )
 import ReadArgs (readArgs)
 import System.Environment (getArgs)
 import System.Hardware.Serialport
-import System.IO
+    ( hOpenSerial,
+      defaultSerialSettings,
+      CommSpeed(CS115200),
+      SerialPortSettings(commSpeed) )
+import System.IO ( hClose, hPutStr )
 
 main = do
   (serialPort, color :: Color, dir, cmdline) <- readArgs

@@ -50,3 +50,9 @@ function die() {
 	play_sound yeep
 }
 ```
+# TODO
+* benchmark
+* add tests
+* more docs
+* parameterize
+  the mod 32 is baked into the source code, add a command line parameter?
