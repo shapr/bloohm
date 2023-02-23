@@ -17,15 +17,15 @@ findPos :: String -> [Integer]
 findPos s = findBits $ BS8.pack s
 
 findBits :: ByteString -> [Integer]
-findBits bs = sort $ [int1, int2, int3]
+findBits bs = sort [int1, int2, int3]
     where wz = BS.unpack $ runhashMD5 bs
-          wzLength = length wz
-          wzThird = wzLength `div` 3
-          multipleOfThree = drop (wzLength `mod` 3) wz
-          tmWz = tritMod wzThird
-          (int1,ws) = tmWz multipleOfThree
-          (int2,ws') = tmWz ws
-          (int3,_) = tmWz ws'
+          wzThird = length wz `div` 3
+          multipleOfThree = drop (length wz `mod` 3) wz
+          (int1,ws) = tritMod wzThird multipleOfThree
+          (int2,ws') = tritMod wzThird ws
+          (int3,_) = tritMod wzThird ws'
+
+
 
 tritMod :: Int -> [Word8] -> (Integer,[Word8])
 tritMod _ [] = error "tritMod got empty list"
