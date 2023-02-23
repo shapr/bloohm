@@ -16,6 +16,7 @@ import System.Hardware.Serialport
       SerialPortSettings(commSpeed) )
 import System.IO ( hClose, hPutStr )
 
+main :: IO ()
 main = do
   (serialPort, color :: Color, dir, cmdline) <- readArgs
   let indices = findPos $ dir <> cmdline
@@ -24,7 +25,7 @@ main = do
       total = intercalate "," combined
   h <- hOpenSerial serialPort $ defaultSerialSettings {commSpeed = CS115200}
   -- print $ "sending " <> total <> " to " <> serialPort
-  hPutStr h (total <> "\r") -- circuit python wants
+  hPutStr h total -- circuit python wants
   hClose h
 
 data Color = Red | Green | Blue | Yellow deriving (Read, Eq, Ord)

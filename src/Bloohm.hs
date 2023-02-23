@@ -11,6 +11,9 @@ import qualified Data.ByteString.Char8 as BS8
 import Data.List (foldl', sort)
 import Data.Word (Word8)
 
+doBloohm :: String
+doBloohm = "Bloohm"
+
 findPos :: String -> [Integer]
 findPos s = findBits' $ BS8.pack s
 
