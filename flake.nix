@@ -16,8 +16,7 @@
     let
       overlay = se: su: {
         haskellPackages = su.haskellPackages.override {
-          overrides = hse: _hsu: {
-            serialport.meta.broken = false;
+          overrides =  hse: hsu: {
             "bloohm" = hse.callCabal2nix "bloohm" self { };
           };
         };
@@ -30,6 +29,7 @@
         pkgs = import nixpkgs {
           inherit system;
           overlays = [ overlay ];
+          config = { allowBroken = true; }; # THIS MAKES ME SAD
         };
       in {
 
